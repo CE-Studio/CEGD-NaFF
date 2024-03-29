@@ -1,8 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://cph5ubyveu5hy"]
+[gd_scene load_steps=15 format=3 uid="uid://cph5ubyveu5hy"]
 
 [ext_resource type="Texture2D" uid="uid://86yixkdi6lri" path="res://Textures/MapBase.png" id="1_gy2vq"]
+[ext_resource type="Script" path="res://Scripts/CameraMonitor.gd" id="1_rul0p"]
 [ext_resource type="Texture2D" uid="uid://0yk7d4gyh8cf" path="res://Textures/MapVent.png" id="2_5nlr8"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="3_s35a3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6vhoq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2wgkx"]
+viewport_path = NodePath("CameraMonitor")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_actaf"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_2wgkx")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g7jrt"]
+size = Vector3(2.07514, 0.0520219, 2.14323)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3btgm"]
 
@@ -27,6 +40,24 @@ disable_receive_shadows = true
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r4avk"]
 
 [node name="World" type="Node3D"]
+
+[node name="CameraMonitor" type="SubViewport" parent="."]
+script = ExtResource("1_rul0p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraMonitor"]
+transform = Transform3D(-0.5, -6.03021e-17, -7.97466e-18, 0, 0.0868241, -0.369303, 6.12323e-17, -0.492404, -0.0651181, 3.15711, 1.07607, 17.8634)
+mesh = SubResource("PlaneMesh_6vhoq")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_actaf")
+
+[node name="Area3D" type="Area3D" parent="CameraMonitor/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraMonitor/MeshInstance3D/Area3D"]
+transform = Transform3D(1, 4.83177e-30, 5.91646e-31, 0, 1, -2.77556e-17, 0, 2.77556e-17, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_g7jrt")
+
+[node name="Camera3D" type="Camera3D" parent="CameraMonitor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.989782, 15.6275)
 
 [node name="FloorCollision" type="StaticBody3D" parent="."]
 
@@ -55,3 +86,6 @@ shape = SubResource("CapsuleShape3D_r4avk")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[connection signal="mouse_entered" from="CameraMonitor/MeshInstance3D/Area3D" to="CameraMonitor" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CameraMonitor/MeshInstance3D/Area3D" to="CameraMonitor" method="_on_mouse_exited"]

@@ -1,14 +1,18 @@
 extends CharacterBody3D
 
 
-const SPEED := 5.0
-const JUMP_VELOCITY := 4.5
-const ACCEL := 25.0
+const SPEED:float = 5.0
+const JUMP_VELOCITY:float = 4.5
+const ACCEL:float = 40.0
+const ABS_VERT_CAM_ROT:float = 1.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var vel := 0.0
+var gravity:float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var vel:float = 0.0
 var direction:Vector3
+
+
+@onready var cam:Camera3D = $"Camera3D"
 
 
 func _ready():
@@ -16,11 +20,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	# Handle mouse movement.
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		var look_vel = Input.get_last_mouse_velocity()
-		rotation.y += look_vel.x * delta * ProjectSettings.get_setting("global/mouse_sensitivity") * -0.25
-	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -45,3 +44,11 @@ func _physics_process(delta):
 	
 	if Input.get_action_raw_strength("Pause"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if Input.get_action_raw_strength("Interact"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _input(event):
+	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		var cam_rot = event.relative * ProjectSettings.get_setting("global/mouse_sensitivity") * -0.25
+		rotation.y += cam_rot.x
+		cam.rotation.x = clamp(cam.rotation.x + cam_rot.y, -ABS_VERT_CAM_ROT, ABS_VERT_CAM_ROT)
