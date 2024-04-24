@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cph5ubyveu5hy"]
+[gd_scene load_steps=86 format=3 uid="uid://cph5ubyveu5hy"]
 
 [ext_resource type="Texture2D" uid="uid://86yixkdi6lri" path="res://Textures/MapBase.png" id="1_gy2vq"]
 [ext_resource type="Script" path="res://Scripts/CameraMonitor.gd" id="1_rul0p"]
@@ -372,7 +372,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-586.101, -128.879)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_2pm50")
 nodes/fragment/2/position = Vector2(-1860, 120)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_ue8ux")
@@ -474,20 +473,6 @@ shader_parameter/Texture2DParameter = SubResource("ViewportTexture_1gd8p")
 [sub_resource type="BoxShape3D" id="BoxShape3D_g7jrt"]
 size = Vector3(2.07514, 0.0520219, 2.14323)
 
-[sub_resource type="GDScript" id="GDScript_sl4ye"]
-script/source = "extends Camera3D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	rotate_y(delta * 5.0)
-"
-
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3btgm"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_p6arr"]
@@ -510,6 +495,350 @@ disable_receive_shadows = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r4avk"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_sdd2o"]
+
+[sub_resource type="Animation" id="Animation_aq8nk"]
+resource_name = "Cam1A"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, 1.01404, 0), Vector3(-0.436332, 1.01404, 0), Vector3(-0.436332, 0.202458, 0), Vector3(-0.436332, 0.202458, 0), Vector3(-0.436332, 1.01404, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x6eis"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, 1.01404, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fo4th"]
+_data = {
+"Cam1A": SubResource("Animation_aq8nk"),
+"RESET": SubResource("Animation_x6eis")
+}
+
+[sub_resource type="Animation" id="Animation_raobo"]
+resource_name = "Cam1B"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, -2.43124, 0), Vector3(-0.436332, -2.43124, 0), Vector3(-0.436332, -2.83616, 0), Vector3(-0.436332, -2.83616, 0), Vector3(-0.436332, -2.43124, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lbk3w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, -2.43124, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eaajv"]
+_data = {
+"Cam1B": SubResource("Animation_raobo"),
+"RESET": SubResource("Animation_lbk3w")
+}
+
+[sub_resource type="Animation" id="Animation_gse6b"]
+resource_name = "Cam2"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, 1.21649, 0), Vector3(-0.436332, 1.21649, 0), Vector3(-0.436332, 0.431096, 0), Vector3(-0.436332, 0.431096, 0), Vector3(-0.436332, 1.21649, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jr0op"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, 1.21649, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uc2cr"]
+_data = {
+"Cam2": SubResource("Animation_gse6b"),
+"RESET": SubResource("Animation_jr0op")
+}
+
+[sub_resource type="Animation" id="Animation_e8hj8"]
+resource_name = "Cam3A"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, 1.21649, 0), Vector3(-0.436332, 1.21649, 0), Vector3(-0.436332, 0.202458, 0), Vector3(-0.436332, 0.202458, 0), Vector3(-0.436332, 1.21649, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cek40"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, 1.21649, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6nok8"]
+_data = {
+"Cam3A": SubResource("Animation_e8hj8"),
+"RESET": SubResource("Animation_cek40")
+}
+
+[sub_resource type="Animation" id="Animation_d2bwl"]
+resource_name = "Cam5"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, 1.21649, 0), Vector3(-0.436332, 1.21649, 0), Vector3(-0.436332, 0.202458, 0), Vector3(-0.436332, 0.202458, 0), Vector3(-0.436332, 1.21649, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8to1f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, 1.21649, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_634um"]
+_data = {
+"Cam5": SubResource("Animation_d2bwl"),
+"RESET": SubResource("Animation_8to1f")
+}
+
+[sub_resource type="Animation" id="Animation_qv3yw"]
+resource_name = "Cam6"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, -0.404916, 0), Vector3(-0.436332, -0.404916, 0), Vector3(-0.436332, -1.41895, 0), Vector3(-0.436332, -1.41895, 0), Vector3(-0.436332, -0.404916, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rh8fk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, -0.404916, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6mntc"]
+_data = {
+"Cam6": SubResource("Animation_qv3yw"),
+"RESET": SubResource("Animation_rh8fk")
+}
+
+[sub_resource type="Animation" id="Animation_fi1jq"]
+resource_name = "Cam7"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, -2.02633, 0), Vector3(-0.436332, -2.02633, 0), Vector3(-0.436332, -3.04036, 0), Vector3(-0.436332, -3.04036, 0), Vector3(-0.436332, -2.02633, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3hrvq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, -2.02633, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgmyb"]
+_data = {
+"Cam7": SubResource("Animation_fi1jq"),
+"RESET": SubResource("Animation_3hrvq")
+}
+
+[sub_resource type="Animation" id="Animation_kg6bc"]
+resource_name = "Cam8"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, -0.202458, 0), Vector3(-0.436332, -0.202458, 0), Vector3(-0.436332, -1.21649, 0), Vector3(-0.436332, -1.21649, 0), Vector3(-0.436332, -0.202458, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3rbbc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, -0.202458, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nbe7m"]
+_data = {
+"Cam8": SubResource("Animation_kg6bc"),
+"RESET": SubResource("Animation_3rbbc")
+}
+
+[sub_resource type="Animation" id="Animation_h5gx0"]
+resource_name = "Cam9"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4, 10, 14, 20),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.436332, -0.202458, 0), Vector3(-0.436332, -0.202458, 0), Vector3(-0.436332, -1.21649, 0), Vector3(-0.436332, -1.21649, 0), Vector3(-0.436332, -0.202458, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y458b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.436332, -0.202458, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jj25m"]
+_data = {
+"Cam9": SubResource("Animation_h5gx0"),
+"RESET": SubResource("Animation_y458b")
+}
+
 [node name="World" type="Node3D"]
 
 [node name="CameraMonitor" type="SubViewport" parent="."]
@@ -531,9 +860,17 @@ collision_mask = 3
 transform = Transform3D(1, 4.83177e-30, 5.91646e-31, 0, 1, -2.77556e-17, 0, 2.77556e-17, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_g7jrt")
 
+[node name="CamName" type="Label3D" parent="CameraMonitor/MeshInstance3D/MonitorInteractable"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, -0.93, 0.01, 0.915)
+text = "Camera name"
+font_size = 20
+outline_size = 8
+horizontal_alignment = 0
+vertical_alignment = 2
+
 [node name="Camera3D" type="Camera3D" parent="CameraMonitor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.989782, 15.6275)
-script = SubResource("GDScript_sl4ye")
+current = true
 
 [node name="FloorCollision" type="StaticBody3D" parent="."]
 
@@ -562,6 +899,7 @@ shape = SubResource("CapsuleShape3D_r4avk")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+current = true
 
 [node name="InteractCast" type="RayCast3D" parent="Player/Camera3D"]
 target_position = Vector3(0, 0, -2)
@@ -572,6 +910,165 @@ collide_with_bodies = false
 [node name="OfficeLight" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.26722, 2.98187, 15.8539)
 omni_range = 10.0
+
+[node name="CameraGroup" type="Node3D" parent="."]
+
+[node name="Cam1A" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.528438, -0.358791, 0.76943, 0, 0.906308, 0.422618, -0.848972, -0.223328, 0.478928, -1.4872, 2.05605, 8.95943)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam1A"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam1A"]
+libraries = {
+"": SubResource("AnimationLibrary_fo4th")
+}
+autoplay = "Cam1A"
+
+[node name="Cam1B" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(-0.758134, 0.275589, -0.591002, 0, 0.906308, 0.422618, 0.652098, 0.320401, -0.687103, -21.4879, 2.05605, -1.97226)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam1B"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam1B"]
+libraries = {
+"": SubResource("AnimationLibrary_eaajv")
+}
+autoplay = "Cam1B"
+
+[node name="Cam2" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.346936, -0.396369, 0.850016, 0, 0.906308, 0.422618, -0.937889, -0.146621, 0.31443, -1.51303, 2.05605, 17.4752)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam2"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam2"]
+libraries = {
+"": SubResource("AnimationLibrary_uc2cr")
+}
+autoplay = "Cam2"
+
+[node name="Cam3A" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.346936, -0.396369, 0.850016, 0, 0.906308, 0.422618, -0.937889, -0.146621, 0.31443, 10.2404, 2.05605, 12.204)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam3A"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam3A"]
+libraries = {
+"": SubResource("AnimationLibrary_6nok8")
+}
+autoplay = "Cam3A"
+
+[node name="Cam3B" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(-0.0505929, 0.422077, -0.905147, 0, 0.906308, 0.422618, 0.998719, 0.0213815, -0.0458528, -21.4984, 2.05605, -11.7369)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam3B"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="Cam4" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(-0.95424, 0.12638, -0.271023, 0, 0.906308, 0.422618, 0.299041, 0.403279, -0.864835, 0.721592, 2.05605, 0.944215)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam4"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="Cam5" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.346936, -0.396369, 0.850016, 0, 0.906308, 0.422618, -0.937889, -0.146621, 0.31443, 6.7816, 2.05605, -4.68935)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam5"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam5"]
+libraries = {
+"": SubResource("AnimationLibrary_634um")
+}
+autoplay = "Cam5"
+
+[node name="Cam6A" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.919135, 0.166487, -0.357033, 0, 0.906308, 0.422618, 0.393942, -0.388443, 0.83302, -21.5433, 2.05605, -13.9814)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam6A"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam6A"]
+libraries = {
+"": SubResource("AnimationLibrary_6mntc")
+}
+autoplay = "Cam6"
+
+[node name="Cam6B" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.919135, 0.166487, -0.357033, 0, 0.906308, 0.422618, 0.393942, -0.388443, 0.83302, -11.0169, 2.05605, -13.9814)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam6B"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam6B"]
+libraries = {
+"": SubResource("AnimationLibrary_6mntc")
+}
+autoplay = "Cam6"
+
+[node name="Cam6C" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.919135, 0.166487, -0.357033, 0, 0.906308, 0.422618, 0.393942, -0.388443, 0.83302, 0.744037, 2.05605, -13.9814)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam6C"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam6C"]
+libraries = {
+"": SubResource("AnimationLibrary_6mntc")
+}
+autoplay = "Cam6"
+
+[node name="Cam7" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(-0.439939, 0.379523, -0.813889, 0, 0.906308, 0.422618, 0.898028, 0.185926, -0.39872, 12.5274, 2.05605, -17.4827)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam7"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam7"]
+libraries = {
+"": SubResource("AnimationLibrary_mgmyb")
+}
+autoplay = "Cam7"
+
+[node name="Cam8" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.979575, 0.0849792, -0.182238, 0, 0.906308, 0.422618, 0.201078, -0.413986, 0.887797, 12.5274, 2.05605, 8.97934)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam8"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam8"]
+libraries = {
+"": SubResource("AnimationLibrary_nbe7m")
+}
+autoplay = "Cam8"
+
+[node name="Cam9" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(0.979575, 0.0849792, -0.182238, 0, 0.906308, 0.422618, 0.201078, -0.413986, 0.887797, 12.5274, 2.05605, 17.4409)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraGroup/Cam9"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, -0.2, 0, 0.2, 1.22465e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_sdd2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraGroup/Cam9"]
+libraries = {
+"": SubResource("AnimationLibrary_jj25m")
+}
+autoplay = "Cam9"
 
 [connection signal="return_control" from="CameraMonitor" to="Player" method="on_control_returned"]
 [connection signal="used_monitor" from="Player" to="CameraMonitor" method="_on_player_used_monitor"]

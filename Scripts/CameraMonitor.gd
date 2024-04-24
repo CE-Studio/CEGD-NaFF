@@ -7,6 +7,9 @@ var _framerate_timer:float = 0.0
 var _is_skewing:bool = false
 var _skew_time:float = 0.0
 var _skew_amount:float = 0.0
+var _cam_swap_button_down:bool = false
+var _current_cam_ID:int = 0
+var _current_cam_node:Node3D
 
 
 const FRAMERATE:float = 0.0625
@@ -25,11 +28,14 @@ signal return_control
 @onready var _screen_obj:MeshInstance3D = $"MeshInstance3D"
 @onready var _screen_shader:ShaderMaterial = _screen_obj.get_surface_override_material(0)
 @onready var _player_cam:Camera3D = $"../Player/Camera3D"
+@onready var _monitor_cam:Camera3D = $"Camera3D"
+@onready var _cam_group:Node3D = $"../CameraGroup"
+@onready var _cam_label:Label3D = $"MeshInstance3D/MonitorInteractable/CamName"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	_set_camera(0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,9 +64,61 @@ func _process(delta):
 		if Input.get_action_raw_strength("MoveBackward"):
 			_is_being_viewed = false
 			return_control.emit()
+		
+		var cam_change_state:int = 0
+		if Input.get_action_raw_strength("MoveLeft"):
+			cam_change_state = -1
+		if Input.get_action_raw_strength("MoveRight"):
+			cam_change_state = 1
+		if cam_change_state != 0 && !_cam_swap_button_down:
+			_current_cam_ID += cam_change_state
+			if _current_cam_ID >= _cam_group.get_child_count():
+				_current_cam_ID = 0
+			elif _current_cam_ID < 0:
+				_current_cam_ID = _cam_group.get_child_count() - 1
+			_set_camera(_current_cam_ID)
+		_cam_swap_button_down = cam_change_state != 0
+	if _current_cam_node:
+		_monitor_cam.global_position = _current_cam_node.global_position
+		_monitor_cam.global_rotation = _current_cam_node.global_rotation
 
 
 func _on_player_used_monitor():
 	_is_being_viewed = true
 	_player_cam.global_position = _screen_obj.global_position + Vector3(0.0, 0.125, -0.5)
 	_player_cam.global_rotation_degrees = Vector3(-12.5, 180.0, 0.0)
+
+
+func _set_camera(cam_id:int):
+	_current_cam_node = _cam_group.get_child(cam_id)
+	_monitor_cam.global_position = _current_cam_node.global_position
+	_monitor_cam.global_rotation = _current_cam_node.global_rotation
+	match cam_id:
+		0:
+			_cam_label.text = "CAM1A - Main Stage"
+		1:
+			_cam_label.text = "CAM1B - Side Stage"
+		2:
+			_cam_label.text = "CAM2 - Entrance"
+		3:
+			_cam_label.text = "CAM3A - Employee Hall"
+		4:
+			_cam_label.text = "CAM3B - Guest Hall"
+		5:
+			_cam_label.text = "CAM4 - Restrooms"
+		6:
+			_cam_label.text = "CAM5 - Backstage"
+		7:
+			_cam_label.text = "CAM6A - Party Room 1"
+		8:
+			_cam_label.text = "CAM6B - Party Room 2"
+		9:
+			_cam_label.text = "CAM6C - Party Room 3"
+		10:
+			_cam_label.text = "CAM7 - Kitchen"
+		11:
+			_cam_label.text = "CAM8 - Parts and Service"
+		12:
+			_cam_label.text = "CAM9 - Utilities"
+		_:
+			_cam_label.text = "CAM? - Unknown"
